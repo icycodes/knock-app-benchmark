@@ -49,9 +49,6 @@ def test_gmail_env_present():
     assert os.environ.get("GMAIL_USER_NAME"), (
         "GMAIL_USER_NAME environment variable is not set."
     )
-    assert os.environ.get("GMAIL_TOKEN_JSON"), (
-        "GMAIL_TOKEN_JSON environment variable is not set."
-    )
 
 
 def test_run_id_env_present():

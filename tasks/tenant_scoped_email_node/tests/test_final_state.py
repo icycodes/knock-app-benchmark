@@ -124,7 +124,8 @@ def test_tenant_exists_with_branding_and_custom_property():
     assert tenant.get("id") == f"tenant-{run_id}", (
         f"Tenant id mismatch: {tenant}"
     )
-    name = tenant.get("name") or ""
+    properties = tenant.get("properties") or {}
+    name = tenant.get("name") or properties.get("name") or ""
     assert run_id in name, (
         f"Tenant name must contain the run id '{run_id}', got: {name!r}"
     )
@@ -134,9 +135,10 @@ def test_tenant_exists_with_branding_and_custom_property():
     assert isinstance(primary_color, str) and primary_color.startswith("#") and len(primary_color) >= 4, (
         f"Tenant settings.branding.primary_color must be a non-empty hex color, got: {primary_color!r}"
     )
-    app_name = tenant.get("app_name")
+    app_name = tenant.get("app_name") or properties.get("app_name")
     assert isinstance(app_name, str) and app_name.strip(), (
-        f"Tenant must carry a non-empty top-level custom property 'app_name', got tenant: {tenant}"
+        f"Tenant must carry a non-empty custom property 'app_name' (either at the top level "
+        f"or under 'properties'), got tenant: {tenant}"
     )
 
 
@@ -246,7 +248,8 @@ def test_email_received_in_gmail_inbox_contains_tenant_app_name():
     expected_to_fragment = f"{gmail_user}+receiver-{run_id}@gmail.com"
 
     tenant = _fetch_tenant()
-    app_name = tenant.get("app_name")
+    properties = tenant.get("properties") or {}
+    app_name = tenant.get("app_name") or properties.get("app_name")
     assert isinstance(app_name, str) and app_name.strip(), (
         f"Tenant must expose a non-empty 'app_name' before checking Gmail. Got: {tenant}"
     )

@@ -40,9 +40,9 @@ You will build a Node.js automation that explicitly creates a tenant with custom
 - Log file: `/home/user/tenant_task/output.log`
 - Read `run-id` from the `ZEALT_RUN_ID` environment variable.
 - A tenant whose `id` equals `tenant-${run-id}` MUST exist in Knock with:
-  - A `name` that contains the `run-id`.
+  - A `name` that contains the `run-id` (Knock may return this under `properties.name`).
   - `settings.branding.primary_color` set to a non-empty hex color string.
-  - A custom property `app_name` whose value is a non-empty string.
+  - A custom property `app_name` whose value is a non-empty string (Knock may return this under `properties.app_name`).
 - A workflow whose `key` equals `tenant-welcome-${run-id}` MUST exist in the `development` environment and MUST be `active`.
 - The workflow MUST contain at least one `channel` step whose `channel_key` is `mailtrap`, whose subject template references `tenant.app_name`, and whose HTML body template references both `recipient.name` and `tenant.name`.
 - The workflow MUST be triggered exactly once with `tenant` set to `tenant-${run-id}` and a single inline recipient whose:
