@@ -1,0 +1,12 @@
+{
+  "name": "Popover Demo zr-bhk6ugd",
+  "steps": [
+    {
+      "type": "channel",
+      "channel_key": "in-app",
+      "template": {
+        "body": "{{ data.body }}"
+      }
+    }
+  ]
+}
