@@ -1,0 +1,13 @@
+{
+  "name": "tenant-task",
+  "version": "1.0.0",
+  "description": "Tenant-scoped Knock email workflow automation",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "@knocklabs/node": "latest",
+    "@knocklabs/mgmt": "latest"
+  }
+}
